@@ -1,0 +1,14 @@
+﻿.left{ float:left; }
+.right{ float:right; }
+.page_box{height:30px; margin-top:5px;}
+.page_box .left{ font-family:"微软雅黑";}
+.page_box .left input{ margin:auto 3px; width:30px; text-align:center; }
+.pager_default{float: right; color: #999999;}
+.pager_default .current{text-align:center;line-height:30px;display:block; float:left;color:#fff;background-color: #0e90d2;border-color: #0e90d2;cursor:default;padding: 0px 12px;}
+.pager_default a {text-align:center; text-decoration: none;background-color: #fff; border: 1px solid #ddd;border-radius: 0;line-height: 30px;display:block;float: left; color:#0e90d2;padding: 0 12px;}
+.pager_default .pg_forbid{color: #AAA;}
+.pager_default input[type="Submit"]{ height:30px;border: 1px solid #ddd;background:#fff; padding: 0px 12px; cursor:pointer;color:#0e90d2;}
+.pager_default input[type="text"]{text-align:center;height:25px; width:25px;border: 1px solid #ddd; margin-right:5px; margin-left:0px; }
+.pager_default span>a{margin-right:5px;line-height:30px;}
+.pager_default .disabled {cursor: not-allowed;background-color: #eeeeee;opacity: 1;}
+.pager_default a[disabled],.pager_default a:disabled {color: #999999;background-color: #fff;border-color: #ddd;cursor: not-allowed;}

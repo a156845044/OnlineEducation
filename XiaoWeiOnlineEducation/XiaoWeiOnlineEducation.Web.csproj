@@ -273,6 +273,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1.custom\package.json" />
     <Content Include="Handler\Query.ashx" />
     <None Include="Properties\PublishProfiles\web.config.pubxml" />
+    <None Include="Properties\PublishProfiles\xiaowei.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

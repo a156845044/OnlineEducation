@@ -79,23 +79,20 @@ namespace XiaoWeiOnlineEducation.Webs.site
             {
                 year = year - 1;
                 model = new Mod_Online_YearPlanBiz().GetYearPlanModel(year.ToString());
-                if (model == null)
-                {
-                    Response.Redirect("~/Webs/404.aspx");
-                }
-                else
-                {
-                    YearId = year;
-                }
+            }
+
+            if (model == null)
+            {
+                Response.Redirect("~/Webs/404.aspx");
             }
             else
             {
-                YearId = year;
                 if (model.StateFlag == 1)
                 {
                     CurrentEnable = true;
                 }
             }
+            YearId = year;
         }
 
         /// <summary>

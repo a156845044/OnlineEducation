@@ -163,9 +163,12 @@ namespace XiaoWeiOnlineEducation.Webs.site
         {
             int recordCount = 0;
             string tempCode = code;
-            if (code.Length > 4)
+            if (!string.IsNullOrWhiteSpace(code))
             {
-                tempCode = code.Substring(0, 4);
+                if (code.Length > 4)
+                {
+                    tempCode = code.Substring(0, 4);
+                }
             }
             rptList.DataSource = new Mod_Online_YearPlan_DetailBiz().GetQueryList(YearId, tempCode, type, "", AspNetPager1.PageSize, AspNetPager1.CurrentPageIndex, out recordCount);
             rptList.DataBind();

@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -247,6 +248,7 @@
     <Content Include="Scripts\uploadify3.2.1\__MACOSX\._uploadify.swf" />
     <Content Include="Webs\404.aspx" />
     <Content Include="Webs\admin\Index.aspx" />
+    <Content Include="Webs\admin\LustrumYearPlanMgr.aspx" />
     <Content Include="Webs\admin\MajorCodeMgr.aspx" />
     <Content Include="Webs\admin\YearPlanMgr.aspx" />
     <Content Include="Webs\admin\YearPlanMgrDetail.aspx" />
@@ -371,6 +373,13 @@
     </Compile>
     <Compile Include="Webs\admin\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Webs\admin\LustrumYearPlanMgr.aspx.cs">
+      <DependentUpon>LustrumYearPlanMgr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Webs\admin\LustrumYearPlanMgr.aspx.designer.cs">
+      <DependentUpon>LustrumYearPlanMgr.aspx</DependentUpon>
     </Compile>
     <Compile Include="Webs\admin\MajorCodeMgr.aspx.cs">
       <DependentUpon>MajorCodeMgr.aspx</DependentUpon>

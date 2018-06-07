@@ -7,15 +7,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>晓微在线教育后台管理系统-登录</title>
-    <meta name="description" content="晓微在线教育">
+    <title>凤凰晓薇·专转本中心后台管理系统-登录</title>
+    <meta name="description" content="凤凰晓薇·专转本中心">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="icon" type="image/png" href="../assets/i/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/i/app-icon72x72@2x.png">
-    <meta name="apple-mobile-web-app-title" content="晓微在线教育" />
+    <meta name="apple-mobile-web-app-title" content="凤凰晓薇·专转本中心" />
     <link rel="stylesheet" href="../assets/css/amazeui.min.css" />
     <link rel="stylesheet" href="../assets/css/amazeui.datatables.min.css" />
     <link rel="stylesheet" href="../assets/css/app.css">

@@ -23,9 +23,9 @@ namespace XiaoWeiOnlineEducation.BLL
         /// </summary>
         /// <param name="yearId">年度编号</param>
         /// <returns>实体</returns>
-        public Mod_Online_YearPlanEntity GetYearPlanModel(string yearId)
+        public Mod_Online_YearPlanEntity GetYearPlanModel(string yearId, PlanRegisterType type = PlanRegisterType.Triennium)
         {
-            SQL sql = SQL.Build("SELECT * FROM Mod_Online_YearPlan WHERE YearId=? ", yearId);
+            SQL sql = SQL.Build("SELECT * FROM Mod_Online_YearPlan WHERE YearId=?  AND [ExtFlag]=? ", yearId, type.ToInt());
             return SqlMap<Mod_Online_YearPlanEntity>.ParseSql(sql).ToObject();
         }
 
@@ -63,7 +63,7 @@ namespace XiaoWeiOnlineEducation.BLL
         /// <param name="path">相对路径</param>
         /// <param name="user">当前登录人员</param>
         /// <returns>执行结果</returns>
-        public bool ExcelImport(string yearId, string path, LoginEntity user)
+        public bool ExcelImport(string yearId, string path, LoginEntity user, string excelName = "年江苏省普通高校“专转本”专业计划表")
         {
             bool isAdd = false;
 
@@ -77,7 +77,8 @@ namespace XiaoWeiOnlineEducation.BLL
                 yearPlanModel = new Mod_Online_YearPlanEntity();
                 yearPlanModel.PlanId = StringHelper.GetGuid();
                 yearPlanModel.YearId = yearId.ToInt();
-                yearPlanModel.PlanName = string.Format("{0}年江苏省普通高校“专转本”专业计划表", yearId);
+                //
+                yearPlanModel.PlanName = string.Format("{0}{1}", yearId, excelName);
             }
 
             List<Mod_Online_ApplicationTypeEntity> applicationTypeAddList = new List<Mod_Online_ApplicationTypeEntity>();//待添加的类型
@@ -310,6 +311,225 @@ namespace XiaoWeiOnlineEducation.BLL
             {
                 return false;
             }
+        }
+
+
+        /// <summary>
+        /// 五年制Excel数据导入
+        /// </summary>
+        /// <param name="yearId">年度</param>
+        /// <param name="path">相对路径</param>
+        /// <param name="user">当前登录人员</param>
+        /// <returns>执行结果</returns>
+        /// <remarks>2018.06.07</remarks>
+        public bool ExcelImportByLustrum(string yearId, string path, LoginEntity user)
+        {
+            bool isAdd = false;
+
+            List<Mod_Online_YearPlan_DetailEntity> addList = new List<Mod_Online_YearPlan_DetailEntity>();//待添加的列表
+            List<Mod_Online_YearPlan_Detail_MajorCodeEntity> detailMajorCodeAddList = new List<Mod_Online_YearPlan_Detail_MajorCodeEntity>();//待添加的计划详细-代码详细
+            //2017年江苏省普通高校“专转本”专业计划表
+            Mod_Online_YearPlanEntity yearPlanModel = GetYearPlanModel(yearId);//获取年度计划实体
+            if (yearPlanModel == null)//添加
+            {
+                isAdd = true;
+                yearPlanModel = new Mod_Online_YearPlanEntity();
+                yearPlanModel.PlanId = StringHelper.GetGuid();
+                yearPlanModel.YearId = yearId.ToInt();
+                //
+                yearPlanModel.PlanName = string.Format("{0}年五年一贯制高职“专转本”计划表（非师范类）", yearId);
+            }
+
+            List<Mod_Online_ApplicationTypeEntity> applicationTypeAddList = new List<Mod_Online_ApplicationTypeEntity>();//待添加的类型
+            List<Mod_Online_SchoolEntity> shcoolAddList = new List<Mod_Online_SchoolEntity>();//待添加的学校列表
+            List<Mod_Online_School_MajorEntity> schoolMajorAddList = new List<Mod_Online_School_MajorEntity>();//学校专业待添加列表
+
+            Mod_Online_ApplicationTypeBiz applicationTypeBiz = new Mod_Online_ApplicationTypeBiz();
+            Mod_Online_SchoolBiz schoolBiz = new Mod_Online_SchoolBiz();//学校编号业务
+            Mod_Online_YearPlan_DetailBiz detailBiz = new Mod_Online_YearPlan_DetailBiz();//详细业务
+            Mod_Online_School_MajorBiz schoolMajorBiz = new Mod_Online_School_MajorBiz();//学校专业业务
+            Mod_Online_YearPlan_Detail_MajorCodeBiz detailMajorCodeBiz = new Mod_Online_YearPlan_Detail_MajorCodeBiz();//专业要求业务
+
+            int publicSchool = 0;//公办
+            int privateSchool = 1;//私办
+
+            StringBuilder strShcoolName = new StringBuilder();//学校名称
+            StringBuilder strSchoolMajorName = new StringBuilder();//学校对应专业名称
+            StringBuilder strCodeId = new StringBuilder();//专业课程要求代码
+
+            string planNumCmdText = string.Format("{0}年招生计划", yearId);
+
+            string cmdText = string.Format(@"SELECT [院校名称],[专业名称],[{0}],[对报考者专科阶段所学专业要求] FROM [Sheet1$];", planNumCmdText);
+
+            List<Mod_Online_ApplicationTypeEntity> applicationTypeList = applicationTypeBiz.GetList();//获取类型列表
+
+            //更新的情况
+            List<Mod_Online_YearPlan_DetailEntity> planDetailList = null;
+            if (!isAdd)
+            {
+                planDetailList = detailBiz.GetYearPlanList(yearPlanModel.PlanId);//获取类型列表
+            }
+
+            using (OleDbDataReader dr = ExcelHelper.ReadExcel(FileHelper.GetMapPath(string.Format("~{0}", path)), cmdText))
+            {
+                while (dr.Read())
+                {
+                    Mod_Online_YearPlan_DetailEntity model = new Mod_Online_YearPlan_DetailEntity();
+                    model.DetailId = StringHelper.GetGuid();
+                    model.PlanId = yearPlanModel.PlanId;
+                    model.YearId = yearPlanModel.YearId;
+
+                    #region 报考类型
+                    model.AppTypeName = StringHelper.TrimString(dr["报考类别"].ToString()).Trim();
+                    Mod_Online_ApplicationTypeEntity tempApplicationType = applicationTypeList.Find(x => x.AppTypeName.Trim() == model.AppTypeName);
+                    if (tempApplicationType != null)
+                    {
+                        model.AppTypeId = tempApplicationType.AppTypeId;
+                    }
+                    else
+                    {
+
+                        tempApplicationType = applicationTypeAddList.Find(x => x.AppTypeName.Trim() == model.AppTypeName);//查询已添加的类型中是否存在该类型
+                        if (tempApplicationType != null)
+                        {
+                            model.AppTypeId = tempApplicationType.AppTypeId;
+                        }
+                        else
+                        {
+                            Mod_Online_ApplicationTypeEntity applicationType = new Mod_Online_ApplicationTypeEntity();
+                            applicationType.AppTypeId = StringHelper.GetGuid();
+                            applicationType.AppTypeName = model.AppTypeName;
+                            applicationTypeAddList.Add(applicationType);
+                            model.AppTypeId = applicationType.AppTypeId;
+
+                        }
+                    }
+                    #endregion
+
+                    //学校
+                    model.SchoolName = StringHelper.TrimString(dr["院校名称"].ToString()).Trim();
+                    model.SchoolType = StringHelper.TrimString(dr["院校类型"].ToString()).Trim() == "公办" ? publicSchool : privateSchool;
+                    strShcoolName.AppendFormat("'{0}',", model.SchoolName);
+
+                    //专业
+                    model.SchoolMajorName = StringHelper.TrimString(dr["专业名称"].ToString()).Trim();
+                    strSchoolMajorName.AppendFormat("'{0}',", model.SchoolMajorName);
+
+                    string numbers = StringHelper.TrimString(dr["计划数"].ToString()).Trim();
+                    //计划数
+                    model.PlanNumber = string.IsNullOrEmpty(numbers) ? 0 : numbers.ToInt();
+
+                    //投档分数
+                    //string castScore = StringHelper.TrimString(dr["投档分数"].ToString()).Trim();
+                    //model.CastScore = string.IsNullOrEmpty(castScore) ? 0 : castScore.ToDouble();
+                    model.CastScore = 0;
+                    string require = StringHelper.TrimString(dr["对报考者专科阶段所学专业等要求"].ToString()).Trim();
+                    model.CandidateRequire = require;
+                    string[] requires = require.Split('、');
+                    foreach (string item in requires)
+                    {
+                        Mod_Online_YearPlan_Detail_MajorCodeEntity detailMajorCode = new Mod_Online_YearPlan_Detail_MajorCodeEntity();
+                        detailMajorCode.Id = StringHelper.GetGuid();
+                        if (item.Split('H').Length > 1)//防止出现中外合作办学情况
+                        {
+                            string[] codes = item.Split('H');
+                            detailMajorCode.CodeId = string.Format("{0}H", codes[0]);
+                            detailMajorCode.CodeName = codes[1];
+                        }
+                        else
+                        {
+                            detailMajorCode.CodeId = StringHelper.RemoveNotNumber(item);
+                            detailMajorCode.CodeName = StringHelper.RemoveNumber(item);
+                        }
+                        detailMajorCode.DetailId = model.DetailId;
+                        detailMajorCode.PlanId = model.PlanId;
+                        detailMajorCode.YearId = model.YearId;
+                        detailMajorCodeAddList.Add(detailMajorCode);
+                        strCodeId.AppendFormat("'{0}',", detailMajorCode.CodeId);
+                    }
+
+                    model.MajorRequire = StringHelper.TrimString(dr["专业课程要求"].ToString()).Trim();
+                    model.Remarks = StringHelper.TrimString(dr["备注"].ToString()).Trim();
+
+                    addList.Add(model);
+                }
+            }
+
+            List<Mod_Online_SchoolEntity> tempShcoolList = schoolBiz.GetSchoolList(strShcoolName.ToString().Trim().TrimEnd(','));
+            List<Mod_Online_School_MajorEntity> tempShcoolMajorList = schoolMajorBiz.GetSchoolMajorList(strSchoolMajorName.ToString().Trim().TrimEnd(','));
+
+            foreach (Mod_Online_YearPlan_DetailEntity import in addList)
+            {
+                Mod_Online_SchoolEntity tempschool = tempShcoolList.Find(x => x.SchoolName == import.SchoolName);
+                if (tempschool == null)
+                {
+                    tempschool = shcoolAddList.Find(x => x.SchoolName == import.SchoolName);//从已添加的中查询，防止重复
+                    if (tempschool == null)
+                    {
+                        tempschool = new Mod_Online_SchoolEntity();
+                        tempschool.SchoolId = StringHelper.GetGuid();
+                        tempschool.SchoolName = import.SchoolName;
+                        tempschool.SchoolType = import.SchoolType;
+                        shcoolAddList.Add(tempschool);
+                    }
+                }
+                import.SchoolType = tempschool.SchoolType;
+                import.SchoolId = tempschool.SchoolId;
+
+                Mod_Online_School_MajorEntity tempschoolMajor = tempShcoolMajorList.Find(x => x.SchoolName == import.SchoolName && x.SchoolMajorName == import.SchoolMajorName);
+                if (tempschoolMajor == null)
+                {
+                    //防止重复
+                    tempschoolMajor = schoolMajorAddList.Find(x => x.SchoolName == import.SchoolName && x.SchoolMajorName == import.SchoolMajorName);
+                    if (tempschoolMajor == null)
+                    {
+                        tempschoolMajor = new Mod_Online_School_MajorEntity();
+                        tempschoolMajor.SchoolMajorId = StringHelper.GetGuid();
+                        tempschoolMajor.SchoolMajorName = import.SchoolMajorName;
+                        tempschoolMajor.SchoolId = import.SchoolId;
+                        tempschoolMajor.SchoolName = import.SchoolName;
+                        schoolMajorAddList.Add(tempschoolMajor);
+                    }
+                }
+                import.SchoolMajorId = tempschoolMajor.SchoolMajorId;
+            }
+
+            return DBHelper.Transaction((dp, ex) =>
+            {
+                if (applicationTypeAddList.Count > 0)
+                {
+                    applicationTypeBiz.Add(applicationTypeAddList, dp);
+                }
+
+                if (shcoolAddList.Count > 0)
+                {
+                    schoolBiz.Add(shcoolAddList, dp);
+                }
+
+                if (schoolMajorAddList.Count > 0)
+                {
+                    schoolMajorBiz.Add(schoolMajorAddList, dp);
+                }
+
+                if (isAdd)
+                {
+                    this.Add(yearPlanModel, dp);
+                    detailBiz.Add(addList, dp);
+                    detailMajorCodeBiz.Add(detailMajorCodeAddList, dp);
+                }
+                else
+                {
+                    if (detailBiz.DelDetail(yearId, dp))
+                    {
+                        detailBiz.Add(addList, dp);
+                    }
+                    if (detailMajorCodeBiz.DelDetailMajorCode(yearId, dp))
+                    {
+                        detailMajorCodeBiz.Add(detailMajorCodeAddList, dp);
+                    }
+                }
+
+            }) > 0;
         }
         #endregion
     }

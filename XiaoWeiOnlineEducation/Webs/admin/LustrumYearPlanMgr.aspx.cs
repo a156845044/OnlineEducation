@@ -80,7 +80,7 @@ namespace XiaoWeiOnlineEducation.Webs.admin
         private void BindrptList()
         {
             int recordCount = 0;
-            rptList.DataSource = planBiz.GetList(Keyword, AspNetPager1.PageSize, AspNetPager1.CurrentPageIndex, out recordCount,Entity.PlanRegisterType.Lustrum);
+            rptList.DataSource = planBiz.GetList(Keyword, AspNetPager1.PageSize, AspNetPager1.CurrentPageIndex, out recordCount, Entity.PlanRegisterType.Lustrum);
             rptList.DataBind();
             AspNetPager1.RecordCount = recordCount;
         }
@@ -126,7 +126,7 @@ namespace XiaoWeiOnlineEducation.Webs.admin
 
             if (ddlType.SelectedValue.Trim() == "0")
             {
-                if (planBiz.ExcelImport(year, path, LoginUser))
+                if (planBiz.ExcelImportByLustrum(year, path, LoginUser))
                 {
                     DialogHelper.ShowTipSuccessMsg("导入计划成功！", "", Page);
                     BindrptList();//绑定计划列表

@@ -36,17 +36,17 @@ namespace XiaoWeiOnlineEducation.BLL
         /// <param name="pageSize">每页显示的记录条数</param>
         /// <param name="pageNumber">当前页索引</param>
         /// <param name="recordCount">总记录条数</param>
+        /// <param name="type">类型</param>
         /// <returns>分页后对象列表</returns>
-        public List<Mod_Online_YearPlanEntity> GetList(string yearId, int pageSize, int pageNumber, out int recordCount)
+        public List<Mod_Online_YearPlanEntity> GetList(string yearId, int pageSize, int pageNumber, out int recordCount, PlanRegisterType type = PlanRegisterType.Triennium)
         {
             StringBuilder strSQL = new StringBuilder();
-            strSQL.Append(" SELECT * FROM Mod_Online_YearPlan  ");
+            strSQL.AppendFormat(" SELECT * FROM Mod_Online_YearPlan  WHERE [ExtFlag]={0} ", type.ToInt());
             if (!string.IsNullOrEmpty(yearId))
             {
                 if (ValidateHelper.IsSafeSqlString(yearId))
                 {
-                    strSQL.Append(" WHERE  ");
-                    strSQL.AppendFormat(" YearId ={0} ", yearId);
+                    strSQL.AppendFormat(" AND YearId ={0} ", yearId);
                 }
             }
             strSQL.Append(" ORDER BY  YearId DESC ");

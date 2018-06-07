@@ -5,7 +5,7 @@
     <link href="../../Scripts/uploadify3.2.1/uploadify.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Nav" runat="server">
-    <li class="am-active">专业计划表管理</li>
+    <li class="am-active">3年制专业计划表管理</li>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="TabPage" runat="server">
     <div class="row">

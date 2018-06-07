@@ -216,6 +216,24 @@ namespace XiaoWeiOnlineEducation.Entity
         [Description("已开放")]
         Open,
     }
+
+    /// <summary>
+    /// 报考年制类型
+    ///  3年
+    ///  5年一贯
+    /// </summary>
+    public enum PlanRegisterType
+    {
+        /// <summary>
+        /// 3年制
+        /// </summary>
+        Triennium=0,
+        /// <summary>
+        /// 5年一贯制
+        /// </summary>
+        Lustrum=1
+
+    }
     #endregion
 
     #region FlagManager

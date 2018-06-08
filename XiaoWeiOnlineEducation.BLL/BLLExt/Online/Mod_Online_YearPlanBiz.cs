@@ -361,7 +361,10 @@ namespace XiaoWeiOnlineEducation.BLL
 
             string cmdText = string.Format(@"SELECT [院校名称],[专业名称],[{0}],[对报考者专科阶段所学专业要求] FROM [Sheet1$];", planNumCmdText);
 
-            List<Mod_Online_ApplicationTypeEntity> applicationTypeList = applicationTypeBiz.GetList();//获取类型列表
+            List<Mod_Online_ApplicationTypeEntity> applicationTypeList = applicationTypeBiz.GetList(PlanRegisterType.Lustrum);//获取类型列表
+
+            //TODO 
+           // var 
 
             //更新的情况
             List<Mod_Online_YearPlan_DetailEntity> planDetailList = null;
@@ -380,50 +383,37 @@ namespace XiaoWeiOnlineEducation.BLL
                     model.YearId = yearPlanModel.YearId;
 
                     #region 报考类型
-                    model.AppTypeName = StringHelper.TrimString(dr["报考类别"].ToString()).Trim();
-                    Mod_Online_ApplicationTypeEntity tempApplicationType = applicationTypeList.Find(x => x.AppTypeName.Trim() == model.AppTypeName);
-                    if (tempApplicationType != null)
+                    if (applicationTypeList.Count > 0)
                     {
-                        model.AppTypeId = tempApplicationType.AppTypeId;
-                    }
-                    else
-                    {
-
-                        tempApplicationType = applicationTypeAddList.Find(x => x.AppTypeName.Trim() == model.AppTypeName);//查询已添加的类型中是否存在该类型
-                        if (tempApplicationType != null)
-                        {
-                            model.AppTypeId = tempApplicationType.AppTypeId;
-                        }
-                        else
-                        {
-                            Mod_Online_ApplicationTypeEntity applicationType = new Mod_Online_ApplicationTypeEntity();
-                            applicationType.AppTypeId = StringHelper.GetGuid();
-                            applicationType.AppTypeName = model.AppTypeName;
-                            applicationTypeAddList.Add(applicationType);
-                            model.AppTypeId = applicationType.AppTypeId;
-
-                        }
+                        model.AppTypeName = applicationTypeList[0].AppTypeName;
+                        model.AppTypeId = applicationTypeList[0].AppTypeId;
                     }
                     #endregion
 
-                    //学校
-                    model.SchoolName = StringHelper.TrimString(dr["院校名称"].ToString()).Trim();
-                    model.SchoolType = StringHelper.TrimString(dr["院校类型"].ToString()).Trim() == "公办" ? publicSchool : privateSchool;
-                    strShcoolName.AppendFormat("'{0}',", model.SchoolName);
+                    string schoolInfoStr = StringHelper.TrimString(dr["院校名称"].ToString()).Trim();
+                    schoolInfoStr = schoolInfoStr.Replace('(', '（');
+                    string[] schoolInfos = schoolInfoStr.Split('（');
+                    if (schoolInfos.Length > 1)
+                    {
+                        //学校
+                        model.SchoolName = schoolInfos[0];
+                        string schoolType = schoolInfos[1].Trim().Trim(')').Trim('）');
+
+                        model.SchoolType = schoolType == "公办" ? publicSchool : privateSchool;
+                        strShcoolName.AppendFormat("'{0}',", model.SchoolName);
+                    }
 
                     //专业
                     model.SchoolMajorName = StringHelper.TrimString(dr["专业名称"].ToString()).Trim();
                     strSchoolMajorName.AppendFormat("'{0}',", model.SchoolMajorName);
 
-                    string numbers = StringHelper.TrimString(dr["计划数"].ToString()).Trim();
+                    string numbers = StringHelper.TrimString(dr[planNumCmdText].ToString()).Trim();
                     //计划数
-                    model.PlanNumber = string.IsNullOrEmpty(numbers) ? 0 : numbers.ToInt();
+                    model.PlanNumber = string.IsNullOrWhiteSpace(numbers) ? 0 : numbers.ToInt();
 
                     //投档分数
-                    //string castScore = StringHelper.TrimString(dr["投档分数"].ToString()).Trim();
-                    //model.CastScore = string.IsNullOrEmpty(castScore) ? 0 : castScore.ToDouble();
                     model.CastScore = 0;
-                    string require = StringHelper.TrimString(dr["对报考者专科阶段所学专业等要求"].ToString()).Trim();
+                    string require = StringHelper.TrimString(dr["对报考者专科阶段所学专业要求"].ToString()).Trim();
                     model.CandidateRequire = require;
                     string[] requires = require.Split('、');
                     foreach (string item in requires)

@@ -36,5 +36,17 @@ namespace XiaoWeiOnlineEducation.BLL
             }
         }
         #endregion
+
+        #region 2018-06
+        /// <summary>
+        /// 获取对象列表
+        /// </summary>
+        /// <returns>对象列表</returns>
+        public List<Mod_Online_ApplicationTypeEntity> GetList(PlanRegisterType type = PlanRegisterType.Triennium)
+        {
+            SQL sql = SQL.Build("SELECT * FROM Mod_Online_ApplicationType where [ExtFlag]=? ", type.ToInt());
+            return SqlMap<Mod_Online_ApplicationTypeEntity>.ParseSql(sql).ToList();
+        }
+        #endregion
     }
 }

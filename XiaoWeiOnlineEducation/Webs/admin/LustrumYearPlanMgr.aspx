@@ -55,8 +55,9 @@
                                             <td>
                                                 <%#string.Format("<a href=\"YearPlanMgrDetail.aspx?PlanId={0}\" target=\"_blank\">查看详细</a>",Eval("PlanId")) %>
                                                 |
-                                               
                                                 <asp:LinkButton ID="lbtnOpen" CommandArgument='<%#string.Format("{0},{1}",Eval("StateFlag"),Eval("PlanId")) %>' CommandName="lbtnOpen" runat="server"><%#Convert.ToInt32(Eval("StateFlag"))==1?"关闭":"开启" %>分数查询</asp:LinkButton>
+                                                |
+                                                <asp:LinkButton ID="lbtnDel" CommandArgument='<%#Eval("PlanId") %>' OnClientClick="return onlbtnConfrim(this,'您确定要删除本年度的所有记录吗？',false)" CommandName="lbtnDel" runat="server">删除</asp:LinkButton>
                                             </td>
                                         </tr>
                                     </ItemTemplate>
@@ -79,6 +80,8 @@
             <div class="am-modal-hd">
                 Excel导入
                
+               
+
                 <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
             </div>
             <div class="am-modal-bd">
@@ -191,7 +194,7 @@
                 'cancelImg': '../../Script/uploadify3.2.1/uploadify-cancel.png',
                 'folder': 'uploadfiles',
                 'queueID': 'upload-fileQueue',
-                'fileTypeExts': '*.xls; *.xlsx;',
+                'fileTypeExts': '*.xls;',
                 'auto': false,
                 'multi': true,
                 'buttonText': '选择要上传的文件',
@@ -215,6 +218,7 @@
                     closeuploadify();
                 }
             });
+
         }
 
 

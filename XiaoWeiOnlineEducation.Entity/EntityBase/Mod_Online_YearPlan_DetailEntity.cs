@@ -18,7 +18,7 @@ namespace XiaoWeiOnlineEducation.Entity
         /// </summary>
         public Mod_Online_YearPlan_DetailEntity()
         {
- 
+
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public string DetailId
         {
             get { return GetProperty<string>("DetailId"); }
-			set { SetProperty("DetailId", value); }
+            set { SetProperty("DetailId", value); }
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public string PlanId
         {
             get { return GetProperty<string>("PlanId"); }
-			set { SetProperty("PlanId", value); }
+            set { SetProperty("PlanId", value); }
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public int YearId
         {
             get { return GetProperty<int>("YearId"); }
-			set { SetProperty("YearId", value); }
+            set { SetProperty("YearId", value); }
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public string AppTypeId
         {
             get { return GetProperty<string>("AppTypeId"); }
-			set { SetProperty("AppTypeId", value); }
+            set { SetProperty("AppTypeId", value); }
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public string AppTypeName
         {
             get { return GetProperty<string>("AppTypeName"); }
-			set { SetProperty("AppTypeName", value); }
+            set { SetProperty("AppTypeName", value); }
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public string SchoolId
         {
             get { return GetProperty<string>("SchoolId"); }
-			set { SetProperty("SchoolId", value); }
+            set { SetProperty("SchoolId", value); }
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public string SchoolName
         {
             get { return GetProperty<string>("SchoolName"); }
-			set { SetProperty("SchoolName", value); }
+            set { SetProperty("SchoolName", value); }
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public int SchoolType
         {
             get { return GetProperty<int>("SchoolType"); }
-			set { SetProperty("SchoolType", value); }
+            set { SetProperty("SchoolType", value); }
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public string SchoolMajorId
         {
             get { return GetProperty<string>("SchoolMajorId"); }
-			set { SetProperty("SchoolMajorId", value); }
+            set { SetProperty("SchoolMajorId", value); }
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public string SchoolMajorName
         {
             get { return GetProperty<string>("SchoolMajorName"); }
-			set { SetProperty("SchoolMajorName", value); }
+            set { SetProperty("SchoolMajorName", value); }
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public int PlanNumber
         {
             get { return GetProperty<int>("PlanNumber"); }
-			set { SetProperty("PlanNumber", value); }
+            set { SetProperty("PlanNumber", value); }
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public string CandidateRequire
         {
             get { return GetProperty<string>("CandidateRequire"); }
-			set { SetProperty("CandidateRequire", value); }
+            set { SetProperty("CandidateRequire", value); }
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public string MajorRequire
         {
             get { return GetProperty<string>("MajorRequire"); }
-			set { SetProperty("MajorRequire", value); }
+            set { SetProperty("MajorRequire", value); }
         }
 
         /// <summary>
@@ -153,16 +153,16 @@ namespace XiaoWeiOnlineEducation.Entity
         public string Remarks
         {
             get { return GetProperty<string>("Remarks"); }
-			set { SetProperty("Remarks", value); }
+            set { SetProperty("Remarks", value); }
         }
 
         /// <summary>
         /// 投档分数
         /// </summary>
-        public double CastScore
+        public string CastScore
         {
-            get { return GetProperty<double>("CastScore"); }
-			set { SetProperty("CastScore", value); }
+            get { return GetProperty<string>("CastScore"); }
+            set { SetProperty("CastScore", value); }
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public int StateFlag
         {
             get { return GetProperty<int>("StateFlag"); }
-			set { SetProperty("StateFlag", value); }
+            set { SetProperty("StateFlag", value); }
         }
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public int OrderIndex
         {
             get { return GetProperty<int>("OrderIndex"); }
-			set { SetProperty("OrderIndex", value); }
+            set { SetProperty("OrderIndex", value); }
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public int DeleteFlag
         {
             get { return GetProperty<int>("DeleteFlag"); }
-			set { SetProperty("DeleteFlag", value); }
+            set { SetProperty("DeleteFlag", value); }
         }
 
         /// <summary>
@@ -198,8 +198,7 @@ namespace XiaoWeiOnlineEducation.Entity
         public int ExtFlag
         {
             get { return GetProperty<int>("ExtFlag"); }
-			set { SetProperty("ExtFlag", value); }
+            set { SetProperty("ExtFlag", value); }
         }
-
     }
 }

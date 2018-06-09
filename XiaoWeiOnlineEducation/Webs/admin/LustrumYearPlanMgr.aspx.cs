@@ -94,8 +94,6 @@ namespace XiaoWeiOnlineEducation.Webs.admin
             BindrptList();//绑定计划列表
         }
 
-
-
         /// <summary>
         /// 搜索
         /// </summary>
@@ -138,7 +136,7 @@ namespace XiaoWeiOnlineEducation.Webs.admin
             }
             else//导入分数
             {
-                if (planBiz.ExcelScoreImport(year, path))
+                if (planBiz.ExcelScoreByLustrum(year, path))
                 {
                     DialogHelper.ShowTipSuccessMsg("导入分数成功！", "", Page);
                     BindrptList();//绑定计划列表
@@ -184,6 +182,19 @@ namespace XiaoWeiOnlineEducation.Webs.admin
                     {
                         DialogHelper.ShowDialogErrorMsg("操作失败！", "", Page);
                     }
+                }
+            }
+            else if (e.CommandName == "lbtnDel")//删除
+            {
+                string id = e.CommandArgument.ToString();
+                if (planBiz.DeletePlan(id))
+                {
+                    DialogHelper.ShowTipSuccessMsg("删除成功！", "", Page);
+                    BindrptList();//绑定计划列表
+                }
+                else
+                {
+                    DialogHelper.ShowDialogErrorMsg("删除操作失败！", "", Page);
                 }
             }
         }

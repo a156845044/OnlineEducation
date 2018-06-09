@@ -34,10 +34,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\XiaoWeiOnlineEducation\Pckage\Brilliant.ORM.dll</HintPath>
     </Reference>
-    <Reference Include="Brilliant.Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\XiaoWeiOnlineEducation\Pckage\Brilliant.Utility.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -68,6 +64,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BrilliantSDK\trunk\Brilliant.Utility\Brilliant.Utility.csproj">
+      <Project>{78b88aed-bfe1-4ffa-974e-b3667a805ef4}</Project>
+      <Name>Brilliant.Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XiaoWeiOnlineEducation.Entity\XiaoWeiOnlineEducation.Entity.csproj">
       <Project>{819defec-7150-44d8-af47-e2f14ee9ff1b}</Project>
       <Name>XiaoWeiOnlineEducation.Entity</Name>

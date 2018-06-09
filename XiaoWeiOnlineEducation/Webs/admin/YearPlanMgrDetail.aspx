@@ -4,7 +4,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Nav" runat="server">
-    <li><a href="YearPlanMgr.aspx">专业计划表管理</a></li>
     <li class="am-active">
         <asp:Literal ID="litNav" runat="server"></asp:Literal>计划详细</li>
 </asp:Content>

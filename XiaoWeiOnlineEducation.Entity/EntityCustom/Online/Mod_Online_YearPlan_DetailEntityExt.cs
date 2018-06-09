@@ -20,27 +20,27 @@ namespace XiaoWeiOnlineEducation.Entity
         /// <summary>
         /// 去年投档分数
         /// </summary>
-        public double LastYearScore
+        public string LastYearScore
         {
-            get { return GetProperty<double>("LastYearScore"); }
+            get { return GetProperty<string>("LastYearScore"); }
             set { SetProperty("LastYearScore", value); }
         }
 
         /// <summary>
         /// 两年前投档分数
         /// </summary>
-        public double TwoYearsAgoScore
+        public string TwoYearsAgoScore
         {
-            get { return GetProperty<double>("TwoYearsAgoScore"); }
+            get { return GetProperty<string>("TwoYearsAgoScore"); }
             set { SetProperty("TwoYearsAgoScore", value); }
         }
 
         /// <summary>
         /// 三年前投档分数
         /// </summary>
-        public double ThreeYearsAgoScore
+        public string ThreeYearsAgoScore
         {
-            get { return GetProperty<double>("ThreeYearsAgoScore"); }
+            get { return GetProperty<string>("ThreeYearsAgoScore"); }
             set { SetProperty("ThreeYearsAgoScore", value); }
         }
 

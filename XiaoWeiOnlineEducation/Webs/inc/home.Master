@@ -100,8 +100,6 @@
             text-align: center;
             background: #2d3e50;
         }
-
-      
     </style>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -109,7 +107,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <header class="am-topbar   am-topbar-fixed-top">
+        <header class="am-topbar  am-topbar-fixed-top" id="header">
             <div class="am-container" style="height: 75px">
                 <h1 class="am-topbar-brand">
                     <a href="../../index.html">
@@ -123,7 +121,7 @@
                 </div>
             </div>
         </header>
-        <div class="about" style="min-height: 532px;">
+        <div class="about" id="about" style="min-height: 532px;">
             <div class="am-g am-container">
                 <div class="am-u-lg-12">
                     <asp:ContentPlaceHolder ID="TabPage" runat="server">
@@ -143,6 +141,10 @@
     <![endif]-->
         <script src="../../assets/js/amazeui.min.js"></script>
         <script src="../../Scripts/js/brilliantui.core.js?page=inside" type="text/javascript"></script>
+        <script>
+            var height = $(window).height() - $("#header").height() - $(".footer").height();
+            $("#about").css("min-height", height + 20);
+        </script>
         <asp:ContentPlaceHolder ID="Script" runat="server">
         </asp:ContentPlaceHolder>
         <!--用于页面生成__doPostBack 函数，本身没有任何意义-->

@@ -262,10 +262,12 @@
     <Content Include="Scripts\uploadify3.2.1\check-exists.php" />
     <Content Include="Scripts\uploadify3.2.1\index.php" />
     <Content Include="Scripts\uploadify3.2.1\uploadify.php" />
+    <Content Include="Webs\site\lustrumquery.aspx" />
     <Content Include="Webs\site\query.aspx" />
     <Content Include="Webs\site\querylist.aspx" />
     <Content Include="Webs\site\score.aspx" />
     <Content Include="Webs\site\scorelist.aspx" />
+    <Content Include="Webs\site\teacherquery.aspx" />
     <Content Include="Webs\User\AccountMgr.aspx" />
     <Content Include="Webs\User\PwdMgr.aspx" />
     <Content Include="Handler\User.ashx" />
@@ -428,6 +430,13 @@
     <Compile Include="Webs\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Webs\site\lustrumquery.aspx.cs">
+      <DependentUpon>lustrumquery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Webs\site\lustrumquery.aspx.designer.cs">
+      <DependentUpon>lustrumquery.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Webs\site\query.aspx.cs">
       <DependentUpon>query.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -455,6 +464,13 @@
     </Compile>
     <Compile Include="Webs\site\scorelist.aspx.designer.cs">
       <DependentUpon>scorelist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Webs\site\teacherquery.aspx.cs">
+      <DependentUpon>teacherquery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Webs\site\teacherquery.aspx.designer.cs">
+      <DependentUpon>teacherquery.aspx</DependentUpon>
     </Compile>
     <Compile Include="Webs\User\AccountMgr.aspx.cs">
       <DependentUpon>AccountMgr.aspx</DependentUpon>

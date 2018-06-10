@@ -107,17 +107,14 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <header class="am-topbar  am-topbar-fixed-top" id="header">
+        <header class="am-topbar   am-topbar-fixed-top" id="header">
             <div class="am-container" style="height: 75px">
-                <h1 class="am-topbar-brand">
-                    <a href="../../index.html">
-                        <img style="height: 75px" src="../../assets/img/xwlogo.png" />
+                <h1 class="am-topbar-brand" style="height: 70px; line-height: 70px;">
+                    <a href="/index.html">
+                        <img style="height: 60px;" src="/assets/img/xwlogo.png" />
                     </a>
                 </h1>
                 <div class="am-collapse am-topbar-collapse" id="collapse-head">
-                    <!--<ul class="am-nav am-nav-pills am-topbar-nav"></ul>
-                <div class="am-topbar-right">
-                </div>-->
                 </div>
             </div>
         </header>

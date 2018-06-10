@@ -220,7 +220,7 @@ namespace XiaoWeiOnlineEducation.BLL
             }
             strSQL.Append(" AND MOY.[ExtFlag]=? ");
             strSQL.Append(" AND MOYD.DetailId IN (SELECT MOYPDMC.DetailId FROM Mod_Online_YearPlan_Detail_MajorCode MOYPDMC WHERE MOYPDMC.PlanId = MOYD.PlanId AND ");
-            strSQL.AppendFormat(" MOYPDMC.CodeId LIKE ('{0}%') ) ", code);
+            strSQL.AppendFormat(" MOYPDMC.CodeId LIKE ('{0}%') OR [CodeName]='专业不限' ) ", code);
             if (!string.IsNullOrEmpty(keyword))
             {
                 if (ValidateHelper.IsSafeSqlString(keyword))

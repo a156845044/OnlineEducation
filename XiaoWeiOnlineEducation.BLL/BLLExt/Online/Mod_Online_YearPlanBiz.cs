@@ -587,6 +587,7 @@ namespace XiaoWeiOnlineEducation.BLL
             }
             //string cmdText = string.Format(@"SELECT [院校名称],[专业名称],[{0}] FROM [Sheet1$];", yearId);
             string cmdText = @"SELECT * FROM [Sheet1$];";
+            string scoreCmdText = string.Format("{0}年", yearId);
             List<SQL> sqlList = new List<SQL>();
             string score = "0";
             using (OleDbDataReader dr = ExcelHelper.ReadExcel(FileHelper.GetMapPath(string.Format("~{0}", path)), cmdText))
@@ -597,7 +598,7 @@ namespace XiaoWeiOnlineEducation.BLL
                     schoolName = schoolName.Replace('(', '（');
                     string[] schoolInfos = schoolName.Split('（');
                     schoolName = schoolInfos[0];
-                    score = dr[yearId].ToString();
+                    score = dr[scoreCmdText].ToString();
                     sqlList.Add(SQL.Build("UPDATE Mod_Online_YearPlan_Detail SET CastScore=? WHERE SchoolName=? AND SchoolMajorName=? AND [PlanId]=? ", score, schoolName, StringHelper.TrimString(dr["专业名称"].ToString()).Trim(), plan.PlanId));
                 }
             }

@@ -7,12 +7,12 @@
 
     <div class="am-g" style="padding-top: 35px;">
         <div class="am-u-lg-12 am-center am-text-center">
-            <button class="am-btn  am-btn-warning">
+            <button class="am-btn  am-btn-warning" id="btnteacher">
                 <i class="am-icon-toggle-off"></i>
                 师范类
             </button>
             &nbsp;&nbsp;
-                <button class="am-btn  am-btn-success">
+                <button class="am-btn  am-btn-success" id="btnnormal">
                     <i class="am-icon-toggle-off"></i>
                     非师范类
                 </button>
@@ -32,4 +32,17 @@
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="Script" runat="server">
+    <script>
+        $(function () {
+            $("#btnteacher").click(function () {
+                window.location.href = "/Webs/site/teacherquery.aspx";
+                return false;
+            });
+
+            $("#btnnormal").click(function () {
+                window.location.href = "/Webs/site/lustrumnormalquery.aspx";
+                return false;
+            });
+        });
+    </script>
 </asp:Content>

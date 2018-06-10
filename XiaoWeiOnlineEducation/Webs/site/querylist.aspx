@@ -16,7 +16,8 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="TabPage" runat="server">
-    <h2 class="about-title about-color am-custom-sm-title">江苏专转本考试（3年制）可报考院校及专业和录取投档线查询</h2>
+    <h2 class="about-title about-color am-custom-sm-title">
+        <asp:Literal ID="LitTitle" Text="江苏专转本考试（3年制）可报考院校及专业和录取投档线查询" runat="server"></asp:Literal></h2>
     <div class="am-u-lg-12 am-u-md-12 am-u-sm-12">
         <div class="am-panel-group">
             <asp:Repeater ID="rptList" runat="server">
@@ -31,6 +32,7 @@
                         </ul>
                         <div class="am-panel-footer">
                             近三年投档分数：
+                           
                             <!--am-avg-sm-3-->
                             <ul class="am-avg-sm-2 am-avg-md-3">
                                 <li style="<%#CurrentEnable==true?"": " display: none;" %>"><%#GetBeforeScore(Convert.ToInt32(Eval("YearId")),Container.GetProperty("CastScore")) %> </li>

@@ -30,6 +30,28 @@ namespace XiaoWeiOnlineEducation.Webs.site
         }
 
         /// <summary>
+        /// 查询模式
+        /// </summary>
+        private int QueryMode
+        {
+            get
+            {
+                int value = PlanRegisterType.Triennium.ToInt();
+                string queryMode = Request.QueryString["mode"];
+                if (!string.IsNullOrWhiteSpace(queryMode))
+                {
+                    queryMode = queryMode.Trim();
+                    if (queryMode == PlanRegisterType.Lustrum.ToInt().ToString())
+                    {
+                        value = PlanRegisterType.Lustrum.ToInt();
+                    }
+                }
+                return value;
+
+            }
+        }
+
+        /// <summary>
         /// 当前年份成绩是否可查
         /// </summary>
         protected bool CurrentEnable
@@ -39,13 +61,23 @@ namespace XiaoWeiOnlineEducation.Webs.site
         }
 
         /// <summary>
-        /// 当前年份
+        /// 计划编码
+        /// </summary>
+        protected string PlanId
+        {
+            get { return ViewState["PlanId"].ToString(); }
+            set { ViewState["PlanId"] = value; }
+        }
+
+        /// <summary>
+        /// 年度编号
         /// </summary>
         protected int YearId
         {
             get { return ViewState["YearId"] == null ? 2017 : Convert.ToInt32(ViewState["YearId"]); }
             set { ViewState["YearId"] = value; }
         }
+
 
         /// <summary>
         /// 页面加载
@@ -73,24 +105,25 @@ namespace XiaoWeiOnlineEducation.Webs.site
         /// </summary>
         private void InitViewState()
         {
-            int year = DateTime.Now.Year;
-            Mod_Online_YearPlanEntity model = new Mod_Online_YearPlanBiz().GetYearPlanModel(year.ToString());
-            if (model == null)
+            Mod_Online_YearPlanBiz planBiz = new Mod_Online_YearPlanBiz();
+            Mod_Online_YearPlanEntity model = null;
+            if (QueryMode == PlanRegisterType.Lustrum.ToInt())
             {
-                year = year - 1;
-                model = new Mod_Online_YearPlanBiz().GetYearPlanModel(year.ToString());
-                if (model == null)
-                {
-                    Response.Redirect("~/Webs/404.aspx");
-                }
-                else
-                {
-                    YearId = year;
-                }
+                model = planBiz.GetFirstYearPlanModel(PlanRegisterType.Lustrum);
+                LitTitle.Text = "江苏专转本考试（5年制非师范类）可报考院校及专业和录取投档线查询";
             }
             else
             {
-                YearId = year;
+                model = planBiz.GetFirstYearPlanModel(PlanRegisterType.Triennium);
+            }
+            if (model == null)
+            {
+                Response.Redirect("~/Webs/404.aspx");
+            }
+            else
+            {
+                PlanId = model.PlanId;
+                YearId = model.YearId;
                 if (model.StateFlag == 1)
                 {
                     CurrentEnable = true;
@@ -144,12 +177,9 @@ namespace XiaoWeiOnlineEducation.Webs.site
             }
             else
             {
+                temp = castScore.ToString();
                 double score = castScore.ToDouble();
-                if (score <= 0)
-                {
-                    temp = "暂无";
-                }
-                else
+                if (score > 0)
                 {
                     temp = string.Format("{0}分", castScore);
                 }
@@ -164,7 +194,6 @@ namespace XiaoWeiOnlineEducation.Webs.site
         /// </summary>
         private void BindrptList()
         {
-            int recordCount = 0;
             string tempCode = code;
             if (!string.IsNullOrWhiteSpace(code))
             {
@@ -173,7 +202,9 @@ namespace XiaoWeiOnlineEducation.Webs.site
                     tempCode = code.Substring(0, 4);
                 }
             }
-            rptList.DataSource = new Mod_Online_YearPlan_DetailBiz().GetQueryList(YearId, tempCode, type, "", AspNetPager1.PageSize, AspNetPager1.CurrentPageIndex, out recordCount);
+            int recordCount = 0;
+            var list = new Mod_Online_YearPlan_DetailBiz().GetQueryList(PlanId, YearId, tempCode, type, "", AspNetPager1.PageSize, AspNetPager1.CurrentPageIndex, out recordCount, QueryMode);
+            rptList.DataSource = list;
             rptList.DataBind();
             AspNetPager1.RecordCount = recordCount;
         }

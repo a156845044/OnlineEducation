@@ -610,6 +610,18 @@ namespace XiaoWeiOnlineEducation.BLL
                 return false;
             }
         }
+
+        /// <summary>
+        /// 获取最新一条计划
+        /// </summary>
+        /// <param name="type">查询模式</param>
+        /// <returns>实体</returns>
+        /// <remarks>2018.06.10</remarks>
+        public Mod_Online_YearPlanEntity GetFirstYearPlanModel(PlanRegisterType type = PlanRegisterType.Triennium)
+        {
+            SQL sql = SQL.Build("SELECT top 1 * FROM Mod_Online_YearPlan WHERE [ExtFlag]=? order by [YearId] desc ", type.ToInt());
+            return SqlMap<Mod_Online_YearPlanEntity>.ParseSql(sql).ToObject();
+        }
         #endregion
     }
 

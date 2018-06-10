@@ -89,6 +89,7 @@
     <Content Include="assets\js\jquery-3.2.1.min.js" />
     <Content Include="ie6update.html" />
     <Content Include="images\ie_update.jpg" />
+    <Content Include="images\teacher\2018.jpg" />
     <Content Include="Pckage\Brilliant.ORM.dll" />
     <Content Include="Pckage\Brilliant.ORM.XML" />
     <Content Include="Pckage\Brilliant.Utility.dll" />
@@ -262,6 +263,7 @@
     <Content Include="Scripts\uploadify3.2.1\check-exists.php" />
     <Content Include="Scripts\uploadify3.2.1\index.php" />
     <Content Include="Scripts\uploadify3.2.1\uploadify.php" />
+    <Content Include="Webs\site\lustrumnormalquery.aspx" />
     <Content Include="Webs\site\lustrumquery.aspx" />
     <Content Include="Webs\site\query.aspx" />
     <Content Include="Webs\site\querylist.aspx" />
@@ -429,6 +431,13 @@
     </Compile>
     <Compile Include="Webs\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Webs\site\lustrumnormalquery.aspx.cs">
+      <DependentUpon>lustrumnormalquery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Webs\site\lustrumnormalquery.aspx.designer.cs">
+      <DependentUpon>lustrumnormalquery.aspx</DependentUpon>
     </Compile>
     <Compile Include="Webs\site\lustrumquery.aspx.cs">
       <DependentUpon>lustrumquery.aspx</DependentUpon>

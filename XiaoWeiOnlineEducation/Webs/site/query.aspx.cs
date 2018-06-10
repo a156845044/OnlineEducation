@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using XiaoWeiOnlineEducation.BLL;
+using XiaoWeiOnlineEducation.Entity;
 
 namespace XiaoWeiOnlineEducation.Webs.site
 {
@@ -70,7 +71,7 @@ namespace XiaoWeiOnlineEducation.Webs.site
         {
             string apptypeId = ddlCategory.SelectedValue;
             string codeId = txtCodeId.Text;
-            Response.Redirect(string.Format("~/Webs/site/querylist.aspx?type={0}&code={1}", apptypeId, codeId));
+            Response.Redirect(string.Format("~/Webs/site/querylist.aspx?type={0}&code={1}&mode={2}", apptypeId, codeId, PlanRegisterType.Triennium.ToInt()));
         }
     }
 }

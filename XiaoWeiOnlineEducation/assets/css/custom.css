@@ -93,6 +93,12 @@
     .am-custom-sm-qrcode {
         padding: 5px 0px;
     }
+    .am-custom-querybtn a {
+        margin-bottom:5px;
+    }
+    .am-comment-custom-img {
+
+    }
 }
 
 @media only screen and (min-width: 1025px) {

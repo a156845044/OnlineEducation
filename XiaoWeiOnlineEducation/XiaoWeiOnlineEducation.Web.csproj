@@ -52,9 +52,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Pckage\Brilliant.ORM.dll</HintPath>
     </Reference>
-    <Reference Include="Brilliant.Utility">
-      <HintPath>Pckage\Brilliant.Utility.dll</HintPath>
-    </Reference>
     <Reference Include="LitJSON, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Pckage\LitJSON.dll</HintPath>
@@ -508,6 +505,10 @@
     <Folder Include="uploadfiles\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BrilliantSDK\trunk\Brilliant.Utility\Brilliant.Utility.csproj">
+      <Project>{78b88aed-bfe1-4ffa-974e-b3667a805ef4}</Project>
+      <Name>Brilliant.Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XiaoWeiOnlineEducation.BLL\XiaoWeiOnlineEducation.BLL.csproj">
       <Project>{f8c8c9f8-7603-416d-abb1-45b5673757f3}</Project>
       <Name>XiaoWeiOnlineEducation.BLL</Name>

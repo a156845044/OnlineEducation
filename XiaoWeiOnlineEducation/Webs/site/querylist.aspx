@@ -18,7 +18,19 @@
             }
 
             .am-comment-custom-img {
+                height: 41.8px;
+                line-height: 41.8px;
+                margin: 0 auto;
             }
+
+                .am-comment-custom-img img {
+                   display:none;
+                }
+
+                .am-comment-custom-img > svg {
+                    fill: currentColor;
+                    background: #f8f8f8;
+                }
 
             .am-comment-main:before, .am-comment-main:after {
                 border-color: none;
@@ -30,41 +42,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="TabPage" runat="server">
     <h2 class="about-title about-color am-custom-sm-title">
         <asp:Literal ID="LitTitle" Text="江苏专转本考试（3年制）可报考院校及专业和录取投档线查询" runat="server"></asp:Literal></h2>
-    <%--  <div class="am-u-lg-12 am-u-md-12 am-u-sm-12">
-        <div class="am-panel-group">
-            <asp:Repeater ID="rptList" runat="server">
-                <ItemTemplate>
-                    <div class="am-panel am-panel-default">
-                        <div class="am-panel-hd">
-                            <h3 class="am-panel-title"><span style="color: green;">#<%#GetItemIndex(Container.ItemIndex,AspNetPager1) %></span>&nbsp;<%#string.Format("{0}&nbsp;（{1}）", Eval("SchoolName"),Convert.ToInt32(Eval("SchoolType"))==0?"公办本科":"民办本科") %></h3>
-                        </div>
-                        <ul class="am-list am-list-static">
-                            <li>专业名称：&nbsp;<%#Eval("SchoolMajorName") %></li>
-                            <li>计划数：&nbsp;<%#string.Format("{0}&nbsp;&nbsp;{1}",Eval("PlanNumber"),Convert.ToInt32(Eval("ExtFlag"))==0?"":"（退役士兵）") %></li>
-                        </ul>
-                        <div class="am-panel-footer">
-                            近三年投档分数：
-                           
-                            <ul class="am-avg-sm-2 am-avg-md-3">
-                                <li style="<%#CurrentEnable==true?"": " display: none;" %>"><%#GetBeforeScore(Convert.ToInt32(Eval("YearId")),Container.GetProperty("CastScore")) %> </li>
-                                <li><%#GetBeforeScore(Convert.ToInt32(Eval("YearId"))-1,Container.GetProperty("LastYearScore")) %> </li>
-                                <li><%#GetBeforeScore(Convert.ToInt32(Eval("YearId"))-2,Container.GetProperty("TwoYearsAgoScore")) %> </li>
-                                <li style="<%#CurrentEnable==true?"display: none;": "" %>"><%#GetBeforeScore(Convert.ToInt32(Eval("YearId"))-3,Container.GetProperty("ThreeYearsAgoScore")) %> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </ItemTemplate>
-                <FooterTemplate>
-                    <%#GetEmptyRow(rptList) %>
-                </FooterTemplate>
-            </asp:Repeater>
-        </div>
-        <webdiyer:AspNetPager ID="AspNetPager1" runat="server" CssClass="pager_default" CurrentPageButtonClass="current"
-            FirstPageText="首页" LastPageText="尾页" NextPageText="下一页" OnPageChanging="AspNetPager1_PageChanging"
-            PrevPageText="上一页" ShowPageIndexBox="Auto" SubmitButtonText="跳转" NumericButtonCount="5" PagingButtonSpacing="3px" ShowBoxThreshold="10">
-        </webdiyer:AspNetPager>
-    </div>--%>
-
     <div class="am-u-lg-12 am-u-md-12 am-u-sm-12">
         <asp:Repeater ID="rptList" runat="server">
             <ItemTemplate>
@@ -84,11 +61,11 @@
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <p>
-                                    <div>
+                                    <div style="text-align: left;">
                                         <span class="am-badge am-badge-warning am-radius"><%#Container.ItemIndex+1 %></span>
                                         <%#Eval("SchoolMajorName") %>&nbsp;&nbsp;
                                     </div>
-                                    <div style="padding-left: 15px;">
+                                    <div style="padding-left: 15px; text-align: left;">
                                         <span>计划数：&nbsp;<%#string.Format("{0}&nbsp;&nbsp;{1}",Eval("PlanNumber"),Convert.ToInt32(Eval("ExtFlag"))==0?"":"（退役士兵）") %></span>
 
                                     </div>

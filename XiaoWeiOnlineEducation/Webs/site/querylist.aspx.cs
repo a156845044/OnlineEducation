@@ -98,6 +98,7 @@ namespace XiaoWeiOnlineEducation.Webs.site
         /// </summary>
         private void PreInitControls()
         {
+            AspNetPager1.PageSize = 5;
         }
 
         /// <summary>
@@ -144,6 +145,7 @@ namespace XiaoWeiOnlineEducation.Webs.site
         /// </summary>
         private void InitControl()
         {
+            
         }
 
         /// <summary>
@@ -203,7 +205,9 @@ namespace XiaoWeiOnlineEducation.Webs.site
                 }
             }
             int recordCount = 0;
-            var list = new Mod_Online_YearPlan_DetailBiz().GetQueryList(PlanId, YearId, tempCode, type, "", AspNetPager1.PageSize, AspNetPager1.CurrentPageIndex, out recordCount, QueryMode);
+            //  var list = new Mod_Online_YearPlan_DetailBiz().GetQueryList(PlanId, YearId, tempCode, type, "", AspNetPager1.PageSize, AspNetPager1.CurrentPageIndex, out recordCount, QueryMode);
+
+            var list = new Mod_Online_YearPlan_DetailBiz().GetMajorSearchbySchool(PlanId, YearId, tempCode, type, "", AspNetPager1.PageSize, AspNetPager1.CurrentPageIndex, out recordCount, QueryMode);
             rptList.DataSource = list;
             rptList.DataBind();
             AspNetPager1.RecordCount = recordCount;

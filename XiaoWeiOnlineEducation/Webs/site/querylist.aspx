@@ -24,7 +24,7 @@
             }
 
                 .am-comment-custom-img img {
-                   display:none;
+                    display: none;
                 }
 
                 .am-comment-custom-img > svg {
@@ -95,7 +95,8 @@
                 <%#GetEmptyRow(rptList) %>
             </FooterTemplate>
         </asp:Repeater>
-        <webdiyer:AspNetPager ID="AspNetPager1" runat="server" CssClass="pager_default" CurrentPageButtonClass="current"
+
+        <webdiyer:AspNetPager ID="AspNetPager1" LayoutType="Ul" PagingButtonLayoutType="UnorderedList"  runat="server" CssClass="am-pagination am-pagination-centered" CurrentPageButtonClass="am-active"
             FirstPageText="首页" LastPageText="尾页" NextPageText="下一页" OnPageChanging="AspNetPager1_PageChanging"
             PrevPageText="上一页" ShowPageIndexBox="Auto" SubmitButtonText="跳转" NumericButtonCount="5" PagingButtonSpacing="3px" ShowBoxThreshold="10">
         </webdiyer:AspNetPager>

@@ -52,6 +52,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Pckage\Brilliant.ORM.dll</HintPath>
     </Reference>
+    <Reference Include="Brilliant.Utility">
+      <HintPath>Pckage\Brilliant.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="LitJSON, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Pckage\LitJSON.dll</HintPath>
@@ -79,11 +82,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\custom.css" />
     <Content Include="assets\css\pager.css" />
     <Content Include="assets\img\4d18f0a3-f98d-47e1-949c-8b6fb9b7c46d.png" />
     <Content Include="assets\img\qrcode.jpg" />
     <Content Include="assets\img\wxqrcode.png" />
     <Content Include="assets\img\xwketangqrcode.png" />
+    <Content Include="assets\img\xwketangqrcode5.png" />
     <Content Include="assets\img\xwlogo.png" />
     <Content Include="assets\img\xwqrcode2.png" />
     <Content Include="assets\js\jquery-3.2.1.min.js" />
@@ -503,10 +508,6 @@
     <Folder Include="uploadfiles\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BrilliantSDK\trunk\Brilliant.Utility\Brilliant.Utility.csproj">
-      <Project>{78b88aed-bfe1-4ffa-974e-b3667a805ef4}</Project>
-      <Name>Brilliant.Utility</Name>
-    </ProjectReference>
     <ProjectReference Include="..\XiaoWeiOnlineEducation.BLL\XiaoWeiOnlineEducation.BLL.csproj">
       <Project>{f8c8c9f8-7603-416d-abb1-45b5673757f3}</Project>
       <Name>XiaoWeiOnlineEducation.BLL</Name>

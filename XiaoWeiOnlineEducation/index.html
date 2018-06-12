@@ -115,8 +115,8 @@
                 font-size: 18px;
             }
 
-            .am-custom-sm-qrcode {
-                padding: 5px 0px;
+             .am-custom-sm-qrcode {
+                 padding: 5px 0px;
             }
         }
 
@@ -132,11 +132,11 @@
     </style>
 </head>
 <body>
-    <header class="am-topbar   am-topbar-fixed-top">
-        <div class="am-container" style="height:75px">
-            <h1 class="am-topbar-brand" style="height:70px; line-height:70px;">
+    <header class="am-topbar am-topbar-fixed-top">
+        <div class="am-container">
+            <h1 class="am-topbar-brand">
                 <a href="index.html">
-                    <img style="height:60px;" src="assets/img/xwlogo.png" />
+                    <img style="height:43px;" src="assets/img/xwlogo.png" />
                 </a>
             </h1>
             <div class="am-collapse am-topbar-collapse" id="collapse-head">
@@ -150,8 +150,8 @@
                 <p>
                     全国统招专转本、专升本志愿报考模拟查询系统
                 </p>
-                <p>
-                    <a href="Webs/site/query.aspx" class="am-btn am-btn-xl get-btn am-custom-lg-btn am-custom-sm-btn">
+                <p class="am-custom-querybtn">
+                    <a href="Webs/site/query.aspx" class="am-btn am-btn-xl get-btn am-custom-lg-btn am-custom-sm-btn  am-btn-default">
                         <span style="display:block; margin-bottom:8px;">
                             江苏专转本考试（3年制）
                         </span>
@@ -159,8 +159,7 @@
                             可报考院校及专业和录取投档线查询
                         </span>
                     </a>
-                    &nbsp; &nbsp;
-                    <a href="Webs/site/lustrumquery.aspx" class="am-btn am-btn-xl get-btn am-custom-lg-btn am-custom-sm-btn">
+                    <a href="Webs/site/lustrumquery.aspx" class="am-btn am-btn-xl get-btn am-custom-lg-btn am-custom-sm-btn am-btn-default">
                         <span style="display:block; margin-bottom:8px;">
                             江苏专转本考试（5年一贯制）
                         </span>
@@ -172,10 +171,13 @@
             </div>
         </div>
     </div>
-    <div class="hope am-custom-sm-qrcode">
+    <div class="hope am-custom-sm-qrcode am-custom-sm-qrcode-last">
         <div class="am-g am-container">
-            <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 hope-img">
-                <img src="assets/img/xwketangqrcode.png" style="width:286px;" alt="" data-am-scrollspy="{animation:'slide-left', repeat: false}">
+            <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 hope-img am-custom-lg-img">
+                <!--<img src="assets/i/examples/landing.png" alt="" data-am-scrollspy="{animation:'slide-left', repeat: false}">-->
+                <img src="assets/img/xwketangqrcode.png" class="am-radius" style="width:220px;" alt="" data-am-scrollspy="{animation:'slide-left', repeat: false}">
+                <div style="height:5px;"></div>
+                <img src="assets/img/xwketangqrcode5.png" class="am-radius" style="width:220px;" alt="" data-am-scrollspy="{animation:'slide-left', repeat: false}">
                 <hr class="am-article-divider am-show-sm-only hope-hr">
             </div>
             <div class="am-u-lg-8 am-u-md-6 am-u-sm-12">
@@ -203,25 +205,5 @@
     <script src="assets/js/jquery.min.js"></script>
     <!--<![endif]-->
     <script src="assets/js/amazeui.min.js"></script>
-    <script type="text/javascript">
-                                //function getUrl(url) {
-                                //    var strs = url.split('/');
-                                //    var url = "../../Handler/" + strs[0] + ".ashx?action=" + strs[1] + "&random=" + Math.random();
-                                //    return url;
-                                //}
-
-                                //$(function () {
-                                //    $.ajax({
-                                //        type: "POST",
-                                //        url: getUrl("Query/GetNewYearPlanEnable"),
-                                //        dataType: "json",
-                                //        success: function (data) {
-                                //            if (data == true) {
-                                //                $("#btn-CastCastScoreQuery").show();
-                                //            }
-                                //        }
-                                //    });
-                                //});
-    </script>
 </body>
 </html>

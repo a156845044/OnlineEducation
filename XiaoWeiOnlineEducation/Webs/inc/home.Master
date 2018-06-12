@@ -18,106 +18,20 @@
     <script src="../../assets/js/jquery-3.2.1.min.js"></script>
     <script src="../../Scripts/lhgdialog4.2.0/lhgdialog.min.js?skin=idialog" type="text/javascript"></script>
     <script src="../../Scripts/js/brilliantui.core.js?page=inside" type="text/javascript"></script>
-
-    <style>
-        .get {
-            background: #1E5B94;
-            color: #fff;
-            text-align: center;
-            padding: 100px 0;
-        }
-
-        .get-title {
-            font-size: 200%;
-            border: 2px solid #fff;
-            padding: 20px;
-            display: inline-block;
-        }
-
-        .get-btn {
-            background: #fff;
-        }
-
-        .detail {
-            background: #fff;
-        }
-
-        .detail-h2 {
-            text-align: center;
-            font-size: 150%;
-            margin: 40px 0;
-        }
-
-        .detail-h3 {
-            color: #1f8dd6;
-        }
-
-        .detail-p {
-            color: #7f8c8d;
-        }
-
-        .detail-mb {
-            margin-bottom: 30px;
-        }
-
-        .hope {
-            background: #0bb59b;
-            padding: 50px 0;
-        }
-
-        .hope-img {
-            text-align: center;
-        }
-
-        .hope-hr {
-            border-color: #149C88;
-        }
-
-        .hope-title {
-            font-size: 140%;
-        }
-
-        .about {
-            background: #fff;
-            padding: 40px 0;
-            color: #7f8c8d;
-        }
-
-        .about-color {
-            color: #34495e;
-        }
-
-        .about-title {
-            font-size: 180%;
-            padding: 20px 0 10px 0;
-            text-align: center;
-        }
-
-        .footer p {
-            color: #7f8c8d;
-            margin: 0;
-            padding: 15px 0;
-            text-align: center;
-            background: #2d3e50;
-        }
-    </style>
-
+    <link href="../../assets/css/custom.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-        <header class="am-topbar  am-topbar-fixed-top" id="header">
-            <div class="am-container" style="height: 75px">
+        <header class="am-topbar am-topbar-fixed-top" id="header">
+            <div class="am-container">
                 <h1 class="am-topbar-brand">
-                    <a href="../../index.html">
-                        <img style="height: 75px" src="../../assets/img/xwlogo.png" />
+                    <a href="/index.html">
+                        <img style="height: 43px;" src="/assets/img/xwlogo.png" />
                     </a>
                 </h1>
                 <div class="am-collapse am-topbar-collapse" id="collapse-head">
-                    <!--<ul class="am-nav am-nav-pills am-topbar-nav"></ul>
-                <div class="am-topbar-right">
-                </div>-->
                 </div>
             </div>
         </header>

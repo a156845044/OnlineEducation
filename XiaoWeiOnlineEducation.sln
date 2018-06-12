@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2020
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XiaoWeiOnlineEducation.Web", "XiaoWeiOnlineEducation\XiaoWeiOnlineEducation.Web.csproj", "{D04DEDAC-D247-47F2-A4A0-2DE25F7B1E16}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XiaoWeiOnlineEducation.BLL", "XiaoWeiOnlineEducation.BLL\XiaoWeiOnlineEducation.BLL.csproj", "{F8C8C9F8-7603-416D-ABB1-45B5673757F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XiaoWeiOnlineEducation.Entity", "XiaoWeiOnlineEducation.Entity\XiaoWeiOnlineEducation.Entity.csproj", "{819DEFEC-7150-44D8-AF47-E2F14EE9FF1B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brilliant.Utility", "..\BrilliantSDK\trunk\Brilliant.Utility\Brilliant.Utility.csproj", "{78B88AED-BFE1-4FFA-974E-B3667A805EF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{819DEFEC-7150-44D8-AF47-E2F14EE9FF1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{819DEFEC-7150-44D8-AF47-E2F14EE9FF1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{819DEFEC-7150-44D8-AF47-E2F14EE9FF1B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78B88AED-BFE1-4FFA-974E-B3667A805EF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78B88AED-BFE1-4FFA-974E-B3667A805EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78B88AED-BFE1-4FFA-974E-B3667A805EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78B88AED-BFE1-4FFA-974E-B3667A805EF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

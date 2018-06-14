@@ -65,14 +65,14 @@
                                         <span class="am-badge am-badge-warning am-radius"><%#Container.ItemIndex+1 %></span>
                                         <%#Eval("SchoolMajorName") %>&nbsp;&nbsp;
                                     </div>
-                                    <div style="padding-left: 15px; text-align: left;">
+                                    <div style="padding-left: 25px; text-align: left;">
                                         <span>计划数：&nbsp;<%#string.Format("{0}&nbsp;&nbsp;{1}",Eval("PlanNumber"),Convert.ToInt32(Eval("ExtFlag"))==0?"":"（退役士兵）") %></span>
 
                                     </div>
 
                                     <blockquote class="am-serif">
                                         近三年投档分数：
-                                     <ul class="am-avg-sm-1 am-avg-md-3 ">
+                                     <ul class="am-avg-sm-1 am-avg-md-3" style="text-align:left;">
                                          <li style="<%#CurrentEnable==true?"": " display: none;" %>"><%#GetBeforeScore(Convert.ToInt32(Eval("YearId")),Container.GetProperty("CastScore")) %> </li>
                                          <li><%#GetBeforeScore(Convert.ToInt32(Eval("YearId"))-1,Container.GetProperty("LastYearScore")) %> </li>
                                          <li><%#GetBeforeScore(Convert.ToInt32(Eval("YearId"))-2,Container.GetProperty("TwoYearsAgoScore")) %> </li>
@@ -95,9 +95,9 @@
                 <%#GetEmptyRow(rptList) %>
             </FooterTemplate>
         </asp:Repeater>
-        <webdiyer:AspNetPager ID="AspNetPager1" LayoutType="Ul" PagingButtonLayoutType="UnorderedList" runat="server" CssClass="am-pagination am-pagination-centered" CurrentPageButtonClass="am-active"
-            FirstPageText="首页" LastPageText="尾页" NextPageText="下一页" OnPageChanging="AspNetPager1_PageChanging"
-            PrevPageText="上一页" ShowPageIndexBox="Auto" SubmitButtonText="跳转" NumericButtonCount="5" PagingButtonSpacing="3px" ShowBoxThreshold="10">
+        <webdiyer:AspNetPager ID="AspNetPager1" LayoutType="Ul" PagingButtonLayoutType="UnorderedList" runat="server" CssClass="am-pagination am-pagination-right" CurrentPageButtonClass="am-active"
+            FirstPageText="首页" LastPageText="尾页" ShowFirstLast="false" NextPageText="&raquo;" OnPageChanging="AspNetPager1_PageChanging"
+            PrevPageText="&laquo;" ShowPageIndexBox="Auto" SubmitButtonText="跳转" NumericButtonCount="5" PagingButtonSpacing="3px" ShowBoxThreshold="10">
         </webdiyer:AspNetPager>
     </div>
 </asp:Content>

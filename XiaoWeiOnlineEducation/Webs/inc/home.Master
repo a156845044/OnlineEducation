@@ -18,7 +18,7 @@
     <script src="../../assets/js/jquery-3.2.1.min.js"></script>
     <script src="../../Scripts/lhgdialog4.2.0/lhgdialog.min.js?skin=idialog" type="text/javascript"></script>
     <script src="../../Scripts/js/brilliantui.core.js?page=inside" type="text/javascript"></script>
-    <link href="../../assets/css/custom.css" rel="stylesheet" />
+    <link href="../../assets/css/custom.css?v=0.0.2" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

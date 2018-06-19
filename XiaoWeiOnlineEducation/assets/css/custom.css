@@ -1,0 +1,132 @@
+﻿.get {
+    background: #1E5B94;
+    color: #fff;
+    text-align: center;
+    padding: 100px 0;
+}
+
+.get-title {
+    font-size: 200%;
+    border: 2px solid #fff;
+    padding: 20px;
+    display: inline-block;
+}
+
+.get-btn {
+    background: #fff;
+}
+
+.detail {
+    background: #fff;
+}
+
+.detail-h2 {
+    text-align: center;
+    font-size: 150%;
+    margin: 40px 0;
+}
+
+.detail-h3 {
+    color: #1f8dd6;
+}
+
+.detail-p {
+    color: #7f8c8d;
+}
+
+.detail-mb {
+    margin-bottom: 30px;
+}
+
+.hope {
+    background: #0bb59b;
+    padding: 50px 0;
+}
+
+.hope-img {
+    text-align: center;
+}
+
+.hope-hr {
+    border-color: #149C88;
+}
+
+.hope-title {
+    font-size: 140%;
+}
+
+.about {
+    background: #fff;
+    padding: 40px 0;
+    color: #7f8c8d;
+}
+
+.about-color {
+    color: #34495e;
+}
+
+.about-title {
+    font-size: 180%;
+    padding: 30px 0 50px 0;
+    text-align: center;
+}
+
+.footer p {
+    color: #7f8c8d;
+    margin: 0;
+    padding: 15px 0;
+    text-align: center;
+    background: #2d3e50;
+}
+
+@media only screen and (max-width: 600px) {
+    .am-custom-sm-title {
+        width: 100%;
+        font-size: 25px;
+    }
+
+    .am-custom-sm-btn {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .am-custom-sm-qrcode {
+        padding: 5px 0px;
+    }
+    .am-custom-querybtn a {
+        margin-bottom:5px;
+    }
+    .am-comment-custom-img {
+
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .am-custom-lg-title {
+        padding: 20px 60px;
+    }
+
+    .am-custom-lg-btn {
+        padding: 10px 15px;
+    }
+
+    .am-custom-lg-img {
+        margin: 0 auto;
+    }
+
+    .am-topbar-brand {
+        padding: 0 10px;
+        float: left;
+        font-size: 1.8rem;
+        height: 75px;
+        line-height: 75px;
+    }
+
+        .am-topbar-brand img {
+            height: 55px !important;
+        }
+
+    .am-custom-sm-qrcode-last {
+        height: 470px;
+    }
+}

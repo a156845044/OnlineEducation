@@ -312,6 +312,39 @@ namespace XiaoWeiOnlineEducation.BLL
             }
         }
         #endregion
+
+        #region 2018-06
+
+        /// <summary>
+        /// 删除计划
+        /// </summary>
+        /// <param name="planId"></param>
+        /// <returns></returns>
+        public bool DeletePlan(string planId)
+        {
+            return DBHelper.Transaction((dp, ex) =>
+            {
+                this.Delete(planId, dp);
+                SQL sql = SQL.Build("DELETE FROM [dbo].[Mod_Online_YearPlan_Detail] WHERE PlanId=?", planId);
+                SqlMap<Mod_Online_YearPlanEntity>.ParseSql(sql).Execute(dp);
+                SQL sql2 = SQL.Build("DELETE FROM [dbo].[Mod_Online_YearPlan_Detail_MajorCode] WHERE PlanId=?", planId);
+                SqlMap<Mod_Online_YearPlanEntity>.ParseSql(sql2).Execute(dp);
+
+            }) > 0;
+        }
+
+
+        /// <summary>
+        /// 获取最新一条计划
+        /// </summary>
+        /// <returns>实体</returns>
+        /// <remarks>2018.06.10</remarks>
+        public Mod_Online_YearPlanEntity GetFirstYearPlanModel()
+        {
+            SQL sql = SQL.Build("SELECT top 1 * FROM Mod_Online_YearPlan order by [YearId] desc ");
+            return SqlMap<Mod_Online_YearPlanEntity>.ParseSql(sql).ToObject();
+        }
+        #endregion
     }
 
 }

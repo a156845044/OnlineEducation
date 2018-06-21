@@ -189,7 +189,10 @@ namespace XiaoWeiOnlineEducation.BLL
 
                     model.MajorRequire = StringHelper.TrimString(dr["专业课程要求"].ToString()).Trim();
                     model.Remarks = StringHelper.TrimString(dr["备注"].ToString()).Trim();
-
+                    if (model.Remarks.Contains("退役士兵"))
+                    {
+                        model.ExtFlag = 1;
+                    }
                     addList.Add(model);
                 }
             }

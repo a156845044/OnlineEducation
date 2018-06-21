@@ -7,6 +7,7 @@ using System.Data;
 using Brilliant.ORM;
 using XiaoWeiOnlineEducation.Entity;
 using Brilliant.Utility;
+using XiaoWeiOnlineEducation.Entity.EntityCustom.Online;
 
 namespace XiaoWeiOnlineEducation.BLL
 {
@@ -182,6 +183,118 @@ namespace XiaoWeiOnlineEducation.BLL
             strSQL.Append(" ORDER BY MOYD.SchoolId  ");
             SQL sql = SQL.Build(strSQL.ToString(), yearId, typeId).Limit(pageSize, pageNum);
             recordCount = sql.RecordCount;
+            return SqlMap<Mod_Online_YearPlan_DetailEntityExt>.ParseSql(sql).ToList();
+        }
+
+        /// <summary>
+        /// 按照学校获取专业计划查询
+        /// </summary>
+        /// <param name="planId">计划列表</param>
+        /// <param name="yearId">年度</param>
+        /// <param name="code">专业代码</param>
+        /// <param name="typeId">报考类型</param>
+        /// <param name="keyword">关键字</param>
+        /// <param name="pageSize">每页显示条数</param>
+        /// <param name="pageNum">当前页码</param>
+        /// <param name="recordCount">总记录条数</param>
+        /// <returns>信息查询列表</returns>
+        public List<PlanDetailSearchEntity> GetMajorSearchbySchool(string planId, int yearId, string code, string typeId, string keyword, int pageSize, int pageNum, out int recordCount)
+        {
+            List<PlanDetailSearchEntity> list = new List<PlanDetailSearchEntity>();
+            StringBuilder strSQL = new StringBuilder();
+            strSQL.Append(" SELECT MOYD.SchoolId,MOYD.SchoolName,MOYD.SchoolType  ");
+
+            strSQL.Append(" FROM Mod_Online_YearPlan_Detail MOYD ");
+            strSQL.Append(" INNER JOIN [dbo].[Mod_Online_YearPlan] MOY ON MOY.[PlanId]=MOYD.PlanId ");
+            strSQL.Append(" WHERE  MOYD.PlanId=? ");
+            if (!string.IsNullOrWhiteSpace(typeId))
+            {
+                strSQL.AppendFormat(" AND MOYD.AppTypeId='{0}' ", typeId);
+            }
+            strSQL.Append(" AND MOYD.DetailId IN (SELECT MOYPDMC.DetailId FROM Mod_Online_YearPlan_Detail_MajorCode MOYPDMC WHERE MOYPDMC.PlanId = MOYD.PlanId AND ");
+            strSQL.AppendFormat(" MOYPDMC.CodeId LIKE ('{0}%') OR MOYPDMC.[CodeName]='专业不限' )  ", code);
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                if (ValidateHelper.IsSafeSqlString(keyword))
+                {
+                    string keyValue = string.Format("'%{0}%'", keyword);
+                    strSQL.Append(" AND (  ");
+                    strSQL.AppendFormat(" MOYD.AppTypeName LIKE ({0}) ", keyValue);
+                    strSQL.AppendFormat(" OR MOYD.SchoolName LIKE ({0}) ", keyValue);
+                    strSQL.AppendFormat(" OR MOYD.SchoolMajorName LIKE ({0}) ", keyValue);
+                    strSQL.AppendFormat(" OR MOYD.PlanNumber LIKE ({0}) ", keyValue);
+                    strSQL.AppendFormat(" OR MOYD.CandidateRequire LIKE ({0}) ", keyValue);
+                    strSQL.Append("  ) ");
+                }
+            }
+            strSQL.Append(" GROUP BY MOYD.SchoolId,MOYD.SchoolName,MOYD.SchoolType  ");
+            SQL sql = SQL.Build(strSQL.ToString(), planId).Limit(pageSize, pageNum);
+            recordCount = sql.RecordCount;
+            list = SqlMap<PlanDetailSearchEntity>.ParseSql(sql).ToList();
+
+            if (list.Count > 0)
+            {
+                string str = string.Join(",", list.Select(e => e.SchoolId).ToList());
+                string schoolId = string.Format("'{0}'", str.Replace(",", "','"));
+                var childQueryList = GetChildQueryList(planId, yearId, code, typeId, keyword, schoolId);
+                foreach (var item in list)
+                {
+                    item.ChildList = childQueryList.FindAll(e => e.SchoolId == item.SchoolId);
+                }
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 获取详细信息查询列表
+        /// </summary>
+        /// <param name="planId">计划列表</param>
+        /// <param name="yearId">年度</param>
+        /// <param name="code">专业代码</param>
+        /// <param name="typeId">报考类型</param>
+        /// <param name="recordCount">总记录条数</param>
+        /// <param name="mode">查询模式 3年  5年</param>
+        /// <param name="keyword">关键字</param>
+        /// <param name="schoolIdStr">限定的学校编号</param>
+        /// <returns>信息查询列表</returns>
+        public List<Mod_Online_YearPlan_DetailEntityExt> GetChildQueryList(string planId, int yearId, string code, string typeId, string keyword, string schoolIdStr)
+        {
+            string tempCommon = @"(SELECT TOP 1 child.CastScore FROM Mod_Online_YearPlan_Detail child INNER JOIN [Mod_Online_YearPlan] childPlan ON childPlan.PlanId=child.PlanId WHERE child.YearId={0} AND child.SchoolId =MOYD.SchoolId AND child.SchoolMajorId =MOYD.SchoolMajorId  AND child.AppTypeId =MOYD.AppTypeId ) ";
+
+            StringBuilder strSQL = new StringBuilder();
+            strSQL.Append(" SELECT MOYD.*,  ");
+            strSQL.AppendFormat(tempCommon, yearId - 1);
+            strSQL.Append(" AS LastYearScore, ");
+            strSQL.AppendFormat(tempCommon, yearId - 2);
+            strSQL.Append(" AS TwoYearsAgoScore, ");
+            strSQL.AppendFormat(tempCommon, yearId - 3);
+            strSQL.Append(" AS ThreeYearsAgoScore ");
+            strSQL.Append(" FROM Mod_Online_YearPlan_Detail MOYD ");
+            strSQL.Append(" INNER JOIN [dbo].[Mod_Online_YearPlan] MOY ON MOY.[PlanId]=MOYD.PlanId ");
+            strSQL.Append(" WHERE  MOYD.PlanId=? ");
+            if (!string.IsNullOrWhiteSpace(typeId))
+            {
+                strSQL.AppendFormat(" AND MOYD.AppTypeId='{0}' ", typeId);
+            }
+            strSQL.Append(" AND MOYD.DetailId IN (SELECT MOYPDMC.DetailId FROM Mod_Online_YearPlan_Detail_MajorCode MOYPDMC WHERE MOYPDMC.PlanId = MOYD.PlanId AND ");
+            strSQL.AppendFormat(" MOYPDMC.CodeId LIKE ('{0}%') OR MOYPDMC.[CodeName]='专业不限' )  ", code);
+            strSQL.AppendFormat(" AND MOYD.[SchoolId] IN ({0})", schoolIdStr);
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                if (ValidateHelper.IsSafeSqlString(keyword))
+                {
+                    string keyValue = string.Format("'%{0}%'", keyword);
+                    strSQL.Append(" AND (  ");
+                    strSQL.AppendFormat(" MOYD.AppTypeName LIKE ({0}) ", keyValue);
+                    strSQL.AppendFormat(" OR MOYD.SchoolName LIKE ({0}) ", keyValue);
+                    strSQL.AppendFormat(" OR MOYD.SchoolMajorName LIKE ({0}) ", keyValue);
+                    strSQL.AppendFormat(" OR MOYD.PlanNumber LIKE ({0}) ", keyValue);
+                    strSQL.AppendFormat(" OR MOYD.CandidateRequire LIKE ({0}) ", keyValue);
+                    strSQL.Append("  ) ");
+                }
+            }
+
+            SQL sql = SQL.Build(strSQL.ToString(), planId);
             return SqlMap<Mod_Online_YearPlan_DetailEntityExt>.ParseSql(sql).ToList();
         }
     }

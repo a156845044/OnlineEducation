@@ -8,141 +8,23 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <link rel="alternate icon" type="image/png" href="assets/i/favicon.png">
     <link rel="stylesheet" href="assets/css/amazeui.css" />
-    <style>
-        .get {
-            background: #1E5B94;
-            color: #fff;
-            text-align: center;
-            padding: 100px 0;
-        }
-
-        .get-title {
-            font-size: 200%;
-            border: 2px solid #fff;
-            padding: 20px;
-            display: inline-block;
-        }
-
-        .get-btn {
-            background: #fff;
-        }
-
-        .detail {
-            background: #fff;
-        }
-
-        .detail-h2 {
-            text-align: center;
-            font-size: 150%;
-            margin: 40px 0;
-        }
-
-        .detail-h3 {
-            color: #1f8dd6;
-        }
-
-        .detail-p {
-            color: #7f8c8d;
-        }
-
-        .detail-mb {
-            margin-bottom: 30px;
-        }
-
-        .hope {
-            background: #0bb59b;
-            padding: 50px 0;
-        }
-
-        .hope-img {
-            text-align: center;
-        }
-
-        .hope-hr {
-            border-color: #149C88;
-        }
-
-        .hope-title {
-            font-size: 140%;
-        }
-
-        .about {
-            background: #fff;
-            padding: 40px 0;
-            color: #7f8c8d;
-        }
-
-        .about-color {
-            color: #34495e;
-        }
-
-        .about-title {
-            font-size: 180%;
-            padding: 30px 0 50px 0;
-            text-align: center;
-        }
-
-        .footer p {
-            color: #7f8c8d;
-            margin: 0;
-            padding: 15px 0;
-            text-align: center;
-            background: #2d3e50;
-        }
-
-        @media only screen and (max-width: 600px) {
-            .am-custom-sm-title {
-                width: 100%;
-                font-size: 25px;
-            }
-
-            .am-custom-sm-title {
-                width: 100%;
-                font-size: 25px;
-            }
-        }
-
-        @media only screen and (max-width: 600px) {
-            .am-custom-sm-title {
-                width: 100%;
-                font-size: 25px;
-            }
-
-            .am-custom-sm-btn {
-                width: 100%;
-                font-size: 18px;
-            }
-
-             .am-custom-sm-qrcode {
-                 padding: 5px 0px;
-            }
-        }
-
-        @media only screen and (min-width: 1025px) {
-            .am-custom-lg-title {
-                padding: 20px 60px;
-            }
-
-            .am-custom-lg-btn {
-                padding: 10px 15px;
-            }
-        }
-    </style>
+    <link href="assets/css/custom.css?v=0.0.2" rel="stylesheet" />
 </head>
 <body>
-    <header class="am-topbar   am-topbar-fixed-top">
-        <div class="am-container" style="height:75px">
+    <header class="am-topbar am-topbar-fixed-top">
+        <div class="am-container">
             <h1 class="am-topbar-brand">
                 <a href="index.html">
-                    <img style="height:75px" src="assets/img/xwlogo.png" />
+                    <img style="height:43px;" src="assets/img/xwlogo.png" />
                 </a>
             </h1>
             <div class="am-collapse am-topbar-collapse" id="collapse-head">
-                <!--<ul class="am-nav am-nav-pills am-topbar-nav"></ul>
-                <div class="am-topbar-right">
-                </div>-->
             </div>
         </div>
     </header>
@@ -153,8 +35,8 @@
                 <p>
                     全国统招专转本、专升本志愿报考模拟查询系统
                 </p>
-                <p>
-                    <a href="Webs/site/query.aspx" class="am-btn am-btn-xl get-btn am-custom-lg-btn am-custom-sm-btn">
+                <p class="am-custom-querybtn">
+                    <a href="Webs/site/query.aspx" class="am-btn am-btn-xl get-btn am-custom-lg-btn am-custom-sm-btn am-btn-default">
                         <span style="display:block; margin-bottom:8px;">
                             江苏专转本考试（3年制）
                         </span>
@@ -167,11 +49,11 @@
             </div>
         </div>
     </div>
-    <div class="hope am-custom-sm-qrcode">
+    <div class="hope am-custom-sm-qrcode am-custom-sm-qrcode-last">
         <div class="am-g am-container">
-            <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 hope-img">
+            <div class="am-u-lg-4 am-u-md-6 am-u-sm-12 hope-img am-custom-lg-img">
                 <!--<img src="assets/i/examples/landing.png" alt="" data-am-scrollspy="{animation:'slide-left', repeat: false}">-->
-                <img src="assets/img/xwketangqrcode.png" style="width:286px;" alt="" data-am-scrollspy="{animation:'slide-left', repeat: false}">
+                <img src="assets/img/xwketangqrcode.png" style="width:280px;" alt="" data-am-scrollspy="{animation:'slide-left', repeat: false}">
 
                 <!--<img src="assets/img/xwqrcode2.png" alt="" data-am-scrollspy="{animation:'slide-left', repeat: false}">-->
                 <hr class="am-article-divider am-show-sm-only hope-hr">
@@ -189,7 +71,7 @@
     </div>
     <footer class="footer">
         <p>
-            © 2017 <a href="http://www.xwketang.com/" target="_blank">江苏晓薇教育科技有限公司自主研发</a>
+            © 2017-2018 <a href="http://www.xwketang.com/" target="_blank">江苏晓薇教育科技有限公司自主研发</a>
         </p>
     </footer>
     <!--[if lt IE 9]>

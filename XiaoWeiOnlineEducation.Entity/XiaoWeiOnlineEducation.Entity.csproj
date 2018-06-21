@@ -65,6 +65,7 @@
     <Compile Include="EntityCustom\Mgr\SessionManager.cs" />
     <Compile Include="EntityCustom\Online\Mod_Online_MajorCodeInfo.cs" />
     <Compile Include="EntityCustom\Online\Mod_Online_YearPlan_DetailEntityExt.cs" />
+    <Compile Include="EntityCustom\Online\PlanDetailSearchEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

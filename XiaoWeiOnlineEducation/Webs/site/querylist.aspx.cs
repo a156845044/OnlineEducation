@@ -48,6 +48,16 @@ namespace XiaoWeiOnlineEducation.Webs.site
         }
 
         /// <summary>
+        /// 计划编码
+        /// </summary>
+        protected string PlanId
+        {
+            get { return ViewState["PlanId"].ToString(); }
+            set { ViewState["PlanId"] = value; }
+        }
+        
+
+        /// <summary>
         /// 页面加载
         /// </summary>
         protected void Page_Load(object sender, EventArgs e)
@@ -66,6 +76,7 @@ namespace XiaoWeiOnlineEducation.Webs.site
         /// </summary>
         private void PreInitControls()
         {
+            AspNetPager1.PageSize = 5;
         }
 
         /// <summary>
@@ -73,26 +84,22 @@ namespace XiaoWeiOnlineEducation.Webs.site
         /// </summary>
         private void InitViewState()
         {
-            int year = DateTime.Now.Year;
-            Mod_Online_YearPlanEntity model = new Mod_Online_YearPlanBiz().GetYearPlanModel(year.ToString());
-            if (model == null)
-            {
-                year = year - 1;
-                model = new Mod_Online_YearPlanBiz().GetYearPlanModel(year.ToString());
-            }
-
+            Mod_Online_YearPlanBiz planBiz = new Mod_Online_YearPlanBiz();
+            Mod_Online_YearPlanEntity model = planBiz.GetFirstYearPlanModel();
+          
             if (model == null)
             {
                 Response.Redirect("~/Webs/404.aspx");
             }
             else
             {
+                PlanId = model.PlanId;
+                YearId = model.YearId;
                 if (model.StateFlag == 1)
                 {
                     CurrentEnable = true;
                 }
             }
-            YearId = year;
         }
 
         /// <summary>
@@ -170,7 +177,9 @@ namespace XiaoWeiOnlineEducation.Webs.site
                     tempCode = code.Substring(0, 4);
                 }
             }
-            rptList.DataSource = new Mod_Online_YearPlan_DetailBiz().GetQueryList(YearId, tempCode, type, "", AspNetPager1.PageSize, AspNetPager1.CurrentPageIndex, out recordCount);
+            //  rptList.DataSource = new Mod_Online_YearPlan_DetailBiz().GetQueryList(YearId, tempCode, type, "", AspNetPager1.PageSize, AspNetPager1.CurrentPageIndex, out recordCount);
+            var list = new Mod_Online_YearPlan_DetailBiz().GetMajorSearchbySchool(PlanId, YearId, tempCode, type, "", AspNetPager1.PageSize, AspNetPager1.CurrentPageIndex, out recordCount);
+            rptList.DataSource = list;
             rptList.DataBind();
             AspNetPager1.RecordCount = recordCount;
         }

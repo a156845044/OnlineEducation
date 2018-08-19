@@ -29,15 +29,17 @@ namespace XiaoWeiOnlineEducation.BLL
         {
             StringBuilder strSQL = new StringBuilder();
             strSQL.Append("SELECT *,(SELECT CodeName FROM Mod_Online_MajorCode temp WHERE temp.Id =Mod_Online_MajorCode.ParentId ) AS  ParentName ");
-            strSQL.Append(" FROM Mod_Online_MajorCode  WHERE ParentId!='' ");
+            strSQL.Append(" FROM Mod_Online_MajorCode  ");
+            // strSQL.Append(" FROM Mod_Online_MajorCode  WHERE ParentId!='' ");
             if (!string.IsNullOrEmpty(keyword))
             {
                 if (ValidateHelper.IsSafeSqlString(keyword))
                 {
-                    strSQL.Append(" AND ( ");
+                    //   strSQL.Append(" AND ( ");
+                    strSQL.Append(" WHERE ");
                     strSQL.AppendFormat(" CodeId LIKE ('{0}%') ", keyword);
                     strSQL.AppendFormat(" OR CodeName LIKE ('%{0}%') ", keyword);
-                    strSQL.Append(" ) ");
+                   // strSQL.Append(" ) ");
                 }
             }
             SQL sql = SQL.Build(strSQL.ToString()).Limit(pageSize, pageNum);

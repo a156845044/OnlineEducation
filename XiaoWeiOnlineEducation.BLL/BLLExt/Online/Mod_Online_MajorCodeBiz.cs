@@ -256,6 +256,7 @@ namespace XiaoWeiOnlineEducation.BLL
             }
             if (flag)
             {
+                strSQL.Append(" ORDER BY CodeId ");
                 SQL sql = SQL.Build(strSQL.ToString());
                 return SqlMap<AutocompleteEntity>.ParseSql(sql).ToList();
             }
